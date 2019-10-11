@@ -6,10 +6,11 @@ const successBtn = (props) => {
     const { btnText, handleSubmit, disable } = props
     return (
         <TouchableOpacity
+            onPress={handleSubmit}
             disabled={disable}
             style={disable ? styles.btnDisabled : styles.btn}
-            onChange={handleSubmit}>
-            <Text>
+            >
+            <Text style={{fontWeight:'bold'}}>
                 {btnText}
             </Text>
         </TouchableOpacity>
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
         justifyContent: 'center',
-        backgroundColor: 'rgb(9, 153, 86)',
+        backgroundColor: 'rgb(3, 127, 252)', 
         padding: 15
     },
     btnDisabled: {

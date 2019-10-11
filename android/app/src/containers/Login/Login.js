@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { updateObject, checkValid } from '../../utilityFunctions/utilityFunctions';
-import LoginUI from '../../components/LoginUI/LoginUI';
+import LogForm from '../../components/LogRegForm/LogRegForm';
 
 class Login extends Component {
   state = {
@@ -30,12 +30,13 @@ class Login extends Component {
     this.setState({ [type]: updatedInput }, () => {
       const formValid = this.state.password.valid && this.state.email.valid
       this.setState({isFormValid: formValid})
-    })
-  }
+    });
+  };
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <LoginUI
+        <LogForm
+          title='Login'
           email={this.state.email}
           password={this.state.password}
           isFormValid={this.state.isFormValid}

@@ -3,13 +3,19 @@ import { View, Text, StyleSheet } from 'react-native';
 import RegisterInput from '../UI/Inputs/registerInput/registerInput';
 import SuccessBtn from '../UI/Buttons/SuccessBtn/SuccessBtn';
 
-const loginUI = (props) => {
-    const { email, password, handleChangeValue, isFormValid} = props
+const logRegForm = (props) => {
+    const { 
+        email, 
+        password, 
+        handleSubmit,
+        handleChangeValue,
+        title, 
+        isFormValid } = props
     return (
         <View style={styles.container}>
             <View style={styles.titleContainer}>
                 <Text style={styles.titleText}>
-                    Login
+                    {title}
                 </Text>
             </View >
             <View style={styles.inputContainer}>
@@ -27,6 +33,7 @@ const loginUI = (props) => {
                 />
             </View>
             <SuccessBtn 
+            handleSubmit={handleSubmit}
             disable={!isFormValid}
             btnText='Submit'/>
         </View>
@@ -40,7 +47,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         alignItems: 'center',
         marginTop: 8,
-        marginBottom: 30
+        marginBottom: 15
     },
     titleText: {
         fontWeight: 'bold',
@@ -53,4 +60,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default loginUI;
+export default logRegForm;
