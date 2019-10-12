@@ -21,8 +21,10 @@ class Register extends Component {
             },
             valid: false,
         },
-        isFormValid: false
+        isFormValid: false,
+        RegisterPage: true,
     };
+
     changeValueHandler = (event, type) => {
         const value = event
         const validCheck = checkValid(value, this.state[type].rules)
@@ -36,12 +38,16 @@ class Register extends Component {
         const email = this.state.email.value
         const password = this.state.password.value
         if (this.state.isFormValid) {
-            this.props.onRegister(email,password)
+            this.props.onRegister(email, password)
         };
     };
+    switchToLoginPage = () => {
+        const { navigation } = this.props
+        return navigation.navigate('Login')
+    }
     render() {
         return (
-            <View style={{flex: 1}}>
+            <View style={{ flex: 1 }}>
                 <RegForm
                     title='Register'
                     handleChangeValue={this.changeValueHandler}
@@ -49,6 +55,8 @@ class Register extends Component {
                     password={this.state.password}
                     isFormValid={this.state.isFormValid}
                     handleSubmit={this.submitRegisterHandler}
+                    handleSwitchLogin={this.switchToLoginPage}
+                    RegisterPage={this.state.RegisterPage}
                 />
             </View>
         );
@@ -57,9 +65,13 @@ class Register extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onRegister: (email, password) => dispatch( actions.registerUserInit(email, password) ),
-        onLogin: () => dispatch( actions.loginUserInit() )
+        onRegister: (email, password) => dispatch(actions.registerUserInit(email, password)),
+        onLogin: () => dispatch(actions.loginUserInit())
+    };
+};
+const mapStateToProps = state => {
+    return {
+        token: state.auth.token
     }
 }
-
-export default connect(null, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

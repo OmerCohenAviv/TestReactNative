@@ -1,5 +1,5 @@
 import * as actionTypes from '../actions/actionTypes';
-
+import { updateObject } from '../../utilityFunctions/utilityFunctions';
 const initalState = {
     loading: false,
     posts: null,
@@ -7,15 +7,16 @@ const initalState = {
 
 
 const dashboardReducer = (state = initalState, actions) => {
+    console.log(actions.type)
     switch(actions.type) {
         case(actionTypes.GET_ALL_POSTS_START): {
-            console.log('start')
+          return updateObject(state, {loading: true})
         }
         case(actionTypes.GET_ALL_POSTS_SUCCESS): {
-            console.log('success')
+            return updateObject(state, {loading: false, posts: actions.posts})
         }
         case(actionTypes.GET_ALL_POSTS_FAIL): {
-            console.log('fail')
+            return updateObject(state, {loading: false})
         }
         default:
             return state;

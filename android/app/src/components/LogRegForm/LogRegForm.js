@@ -2,14 +2,17 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import RegisterInput from '../UI/Inputs/registerInput/registerInput';
 import SuccessBtn from '../UI/Buttons/SuccessBtn/SuccessBtn';
+import PrimaryBtn from '../UI/Buttons/PrimaryBtn/PrimaryBtn';
 
 const logRegForm = (props) => {
-    const { 
-        email, 
-        password, 
+    const {
+        email,
+        password,
         handleSubmit,
+        RegisterPage,
+        handleSwitchLogin,
         handleChangeValue,
-        title, 
+        title,
         isFormValid } = props
     return (
         <View style={styles.container}>
@@ -32,10 +35,22 @@ const logRegForm = (props) => {
                     placeholder='Password'
                 />
             </View>
-            <SuccessBtn 
-            handleSubmit={handleSubmit}
-            disable={!isFormValid}
-            btnText='Submit'/>
+            <View style={styles.buttonsContainer}>
+                <SuccessBtn
+                    handleSubmit={handleSubmit}
+                    disable={!isFormValid}
+                    btnText='Submit' />
+                {
+                    RegisterPage ?
+                        <View style={{ marginLeft: 10 }}>
+                            <PrimaryBtn
+                                handleSubmit={handleSwitchLogin}
+                                btnText='Arleady Got an Account?' />
+                        </View>
+                        : null
+                }
+            </View>
+
         </View>
     )
 };
@@ -47,7 +62,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         alignItems: 'center',
         marginTop: 8,
-        marginBottom: 15
+        marginBottom: 15,
     },
     titleText: {
         fontWeight: 'bold',
@@ -58,6 +73,10 @@ const styles = StyleSheet.create({
         alignContent: 'center',
         alignItems: 'center',
     },
+    buttonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+    }
 });
 
 export default logRegForm;

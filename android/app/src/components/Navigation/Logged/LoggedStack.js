@@ -1,16 +1,12 @@
 import { createStackNavigator } from 'react-navigation-stack'
-import { Tabs } from './Tabs';
-import Login from '../../containers/Login/Login';
+import { LoggedTabs } from './LoggedTabs';
 
-export const mainStackNavigator = createStackNavigator({
+export const mainStackNavigatorLogged = createStackNavigator({
     Home: {
-        screen: Tabs,
+        screen: LoggedTabs,
         navigationOptions: {
             header: null,
         }
-    },
-    Login: {
-        screen: Login,
     },
 },
     {

@@ -7,6 +7,8 @@ export const LOGIN_USER_START =    'LOGIN_USER_START';
 export const LOGIN_USER_SUCCESS =  'LOGIN_USER_SUCCESS';
 export const LOGIN_USER_FAIL =     'LOGIN_USER_FAIL';
 
+export const LOGOUT_USER = 'LOGOUT_USER';
+
 
 
 export const GET_ALL_POSTS_START =   'GET_ALL_POSTS_START';
@@ -23,4 +25,4 @@ export const GET_MY_POSTS_FAIL =    'GET_MY_POSTS_FAIL';
 
 export const ADD_POST_START =   'ADD_POST_START';
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS';
-export const ADD_POST_FAIL =    'ADD_POST_FAIL'
+export const ADD_POST_FAIL =    'ADD_POST_FAIL';

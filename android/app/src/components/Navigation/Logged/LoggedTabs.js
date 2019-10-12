@@ -1,23 +1,27 @@
 
 import { Platform } from 'react-native';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
-import Dashboard from '../../containers/Dashboard/Dashboard';
-import Register from '../../containers/Register/Register';
+import Dashboard from '../../../containers/Dashboard/Dashboard';
+import Logout from '../../../containers/Logout/Logout';
 
 
-export const Tabs = createMaterialTopTabNavigator({
+
+
+export const LoggedTabs = createMaterialTopTabNavigator({
     Dashboard: {
         screen: Dashboard,
         navigationOptions: {
             tabBarLabel: 'Home',
         },
     },
-    Register: {
-        screen: Register,
+    Logout: {
+        screen: Logout,
         navigationOptions: {
-            tabBarLabel: 'Register',
+            tabBarLabel: 'Logout',
         }
     },
+
+
 }, {
     tabBarOptions: {
         activeTintColor: Platform.OS === 'ios' ? 'yellow' : 'yellow',

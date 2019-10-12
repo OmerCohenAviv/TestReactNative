@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         textAlign: 'center',
         justifyContent: 'center',
-        backgroundColor: 'rgb(31, 115, 184)', 
+        backgroundColor: 'rgb(34, 186, 130)', 
         padding: 15
     },
     btnDisabled: {

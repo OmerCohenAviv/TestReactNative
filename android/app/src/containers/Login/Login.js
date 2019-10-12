@@ -23,15 +23,19 @@ class Login extends Component {
     },
     isFormValid: false
   };
-
-
+  componentDidUpdate() {
+    if (this.props.token !== null) {
+      const { navigation } = this.props
+      return navigation.navigate('Dashboard')
+    }
+  }
   changeValueHandler = (event, type) => {
     const value = event
     const validCheck = checkValid(value, this.state[type].rules)
     const updatedInput = updateObject(this.state[type], { value: value, valid: validCheck })
     this.setState({ [type]: updatedInput }, () => {
       const formValid = this.state.password.valid && this.state.email.valid
-      this.setState({isFormValid: formValid})
+      this.setState({ isFormValid: formValid })
     });
   };
   submitLoginHandler = () => {
@@ -59,7 +63,11 @@ const mapDispatchToProps = dispatch => {
   return {
     onLogin: (email, password) => dispatch(actions.loginUserInit(email, password))
   }
+};
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token
+  }
 }
 
-
-export default connect(null,mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

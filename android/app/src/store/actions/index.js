@@ -1,6 +1,7 @@
 export {
     registerUserInit,
-    loginUserInit
+    loginUserInit,
+    logoutUser
 } from './auth'
 
 

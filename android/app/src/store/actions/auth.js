@@ -7,8 +7,9 @@ const registerUserStart = () => {
     };
 };
 const registerUserSuccess = (response) => {
-    const userID = response.data.user_id
-    const token = response.data.token
+    
+    const userID = response.data.data.user_id
+    const token = response.data.data.token
     return {
         type: actionTypes.REGISTER_USER_SUCCESS,
         userID: userID,
@@ -16,7 +17,6 @@ const registerUserSuccess = (response) => {
     }
 };
 const registerUserFail = (error) => {
-
     return {
         type: actionTypes.REGISTER_USER_FAIL,
         error: error
@@ -30,8 +30,8 @@ export const registerUserInit = (email, password) => {
     return dispatch => {
         dispatch(registerUserStart())
         axios.post('/usr/register', data)
-            .then((response) => dispatch(registerUserSuccess(response)))
-            .catch((error) => dispatch(registerUserFail(error)))
+            .then( (response) => dispatch(registerUserSuccess(response) ))
+            .catch( (error) => dispatch(registerUserFail(error) ))
     };
 };
 
@@ -43,8 +43,10 @@ const loginUserStart = () => {
     };
 };
 const loginUserSuccess = (response) => {
+    console.log(response)
     const userID = response.data.data.user_id
-    const token = response.data.datatoken
+    const token = response.data.data.token
+    console.log(token)
     return {
         type: actionTypes.LOGIN_USER_SUCCESS,
         userID: userID,
@@ -67,5 +69,12 @@ export const loginUserInit = (email, password) => {
         axios.post('/usr/login', data)
             .then((response) => dispatch(loginUserSuccess(response)))
             .catch((error) => dispatch(loginUserFail(error)))
+    };
+};
+
+
+export const logoutUser = () => {
+    return {
+        type: actionTypes.LOGOUT_USER
     };
 };

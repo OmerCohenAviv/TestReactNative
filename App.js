@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import Login from './android/app/src/containers/Login/Login';
-import Register from './android/app/src/containers/Register/Register';
-import Dashboard from './android/app/src/containers/Dashboard/Dashboard';
+import { View, StatusBar } from 'react-native';
+import { mainStackNavigator } from './android/app/src/components/Navigation/Stack';
+import { mainStackNavigatorLogged } from './android/app/src/components/Navigation/Logged/LoggedStack';
+import { createAppContainer } from 'react-navigation';
+import { connect } from 'react-redux';
 
+let AppContainerComp = createAppContainer(mainStackNavigator)
 class App extends Component {
   render() {
+    AppContainerVar = <AppContainerComp />
     return (
-      <View style={{flex: 1}}>
-        <Dashboard />
+      <View style={{ flex: 1 }}>
+        <StatusBar backgroundColor="lightblue" barStyle="light-content" />
+        {AppContainerVar}
       </View>
     );
   };
 };
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    token: state.auth.token
+  }
+}
+export default connect(mapStateToProps)(App);
