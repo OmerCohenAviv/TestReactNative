@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { updateObject, checkValid } from '../../utilityFunctions/utilityFunctions';
+import { connect } from 'react-redux';
 import LogForm from '../../components/LogRegForm/LogRegForm';
+import * as actions from '../../store/actions/index';
 
 class Login extends Component {
   state = {
@@ -32,6 +34,11 @@ class Login extends Component {
       this.setState({isFormValid: formValid})
     });
   };
+  submitLoginHandler = () => {
+    const email = this.state.email.value
+    const password = this.state.password.value
+    this.props.onLogin(email, password)
+  };
   render() {
     return (
       <View style={{ flex: 1 }}>
@@ -40,6 +47,7 @@ class Login extends Component {
           email={this.state.email}
           password={this.state.password}
           isFormValid={this.state.isFormValid}
+          handleSubmit={this.submitLoginHandler}
           handleChangeValue={this.changeValueHandler}
         />
       </View>
@@ -47,5 +55,11 @@ class Login extends Component {
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onLogin: (email, password) => dispatch(actions.loginUserInit(email, password))
+  }
+}
 
-export default Login;
+
+export default connect(null,mapDispatchToProps)(Login);

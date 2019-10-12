@@ -33,7 +33,6 @@ class Register extends Component {
         });
     };
     submitRegisterHandler = () => {
-        console.log('Submit')
         const email = this.state.email.value
         const password = this.state.password.value
         if (this.state.isFormValid) {
@@ -58,7 +57,7 @@ class Register extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onRegister: () => dispatch( actions.registerUserInit() ),
+        onRegister: (email, password) => dispatch( actions.registerUserInit(email, password) ),
         onLogin: () => dispatch( actions.loginUserInit() )
     }
 }

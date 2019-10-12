@@ -1,19 +1,27 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../utilityFunctions/utilityFunctions';
 
+
 initalState = {
     token: null,
-    loading: false
+    userID: null,
+    loading: false,
+    error: null,
 };
 
 
- const authReducer = (state = initalState, actions) => {
-    switch(actions.type) {
-        case (actionTypes.REGISTER_USER_START): return updateObject( state, {loading: true} )        
+const authReducer = (state = initalState, actions) => {
+    switch (actions.type) {
+        case (actionTypes.REGISTER_USER_START): return updateObject(state, { loading: true })
         case (actionTypes.REGISTER_USER_SUCCESS): {
+            return updateObject(state, {
+                loading: false,
+                token: actions.token,
+                userID: actions.userID
+            });
         }
-        case (actionTypes.REGISTER_USER_FAIL): {
-        }
+        case (actionTypes.REGISTER_USER_FAIL): return updateObject(state, {loading: false, error: actions.error})
+        
         default:
             return state
     };

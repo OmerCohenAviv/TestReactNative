@@ -1,52 +1,71 @@
 import * as actionTypes from './actionTypes';
-import axios from '../../axios';
+import axios from '../../axios'
 
 const registerUserStart = () => {
     return {
         type: actionTypes.REGISTER_USER_START
     };
 };
-const registerUserSuccess = (params) => {
+const registerUserSuccess = (response) => {
+    const userID = response.data.user_id
+    const token = response.data.token
     return {
-        type: actionTypes.REGISTER_USER_SUCCESS
+        type: actionTypes.REGISTER_USER_SUCCESS,
+        userID: userID,
+        token: token
     }
 };
 const registerUserFail = (error) => {
+
     return {
-        type: actionTypes.REGISTER_USER_FAIL
+        type: actionTypes.REGISTER_USER_FAIL,
+        error: error
     };
 };
-export const registerUserInit = (data) => {
+export const registerUserInit = (email, password) => {
+    const data = {
+        email: email,
+        password: password
+    };
     return dispatch => {
-        dispatch( registerUserStart() )
+        dispatch(registerUserStart())
         axios.post('/usr/register', data)
-        .then( (response) => dispatch(registerUserSuccess(response)) )
-        .catch( (error) => dispatch(registerUserFail(error)) )
+            .then((response) => dispatch(registerUserSuccess(response)))
+            .catch((error) => dispatch(registerUserFail(error)))
     };
 };
 
 
-//----
+
 const loginUserStart = () => {
     return {
         type: actionTypes.LOGIN_USER_START
     };
 };
-const loginUserSuccess = (params) => {
+const loginUserSuccess = (response) => {
+    const userID = response.data.data.user_id
+    const token = response.data.datatoken
     return {
-        type: actionTypes.LOGIN_USER_SUCCESS
-    }
+        type: actionTypes.LOGIN_USER_SUCCESS,
+        userID: userID,
+        token: token
+    };
 };
 const loginUserFail = (error) => {
     return {
-        type: actionTypes.LOGIN_USER_FAIL
+        type: actionTypes.LOGIN_USER_FAIL,
+        error: error
     };
 };
-export const loginUserInit = (data) => {
+export const loginUserInit = (email, password) => {
+    const data = {
+        email: email,
+        password: password
+    };
     return dispatch => {
-        dispatch( loginUserStart() )
+        dispatch(loginUserStart())
         axios.post('/usr/login', data)
-        .then( (response) => dispatch(loginUserSuccess(response)) )
-        .catch( (error) => dispatch(loginUserFail(error)) )
+            .then((response) => dispatch(loginUserSuccess(response)))
+            .catch((error) => dispatch(loginUserFail(error)))
     };
 };
