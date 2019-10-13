@@ -20,6 +20,25 @@ export const getAllPostsInit = (token) => {
     };
 };
 
+const getMyPostsStart = (myUserID) => {
+    return { type: actionTypes.GET_ALL_POSTS_START }
+};
+const getMyPostsSuccess = () => {
+    return { type: actionTypes.GET_ALL_POSTS_SUCCESS }
+};
+const getMyPostsFail = () => {
+    return { type: actionTypes.getAllPostsFail }
+};
+export const getMyPostsInit = () => {
+    return dispatch => {
+        dispatch(getMyPostsStart())
+        axios.get('/post/get-posts-by-user-id/', { header: { Authorization: token } })
+            .then((response) => dispatch(getMyPostsSuccess(response)))
+            .catch((error) => dispatch(getMyPostsFail(error)))
+    };
+};
+
+
 const deletePostStart = () => {
     return { type: actionTypes.DELETE_POST_START }
 };
@@ -32,11 +51,12 @@ const deletePostFail = () => {
 export const deletePostInit = (postID) => {
     return dispatch => {
         dispatch(deletePostStart())
-        axios.delete('/post/delete-post-by-id/' + postID)
+        axios.delete('/post/delete-post-by-id/' + postID, { header: { Authorization: token } })
             .then((response) => dispatch(deletePostSuccess(response)))
             .catch((error) => dispatch(deletePostFail(error)))
     };
 };
+
 
 
 const addPostStart = () => {
@@ -52,11 +72,14 @@ export const addPostInit = (title, image) => {
     const payload = {
         title: title,
         image_url: image
-    }
+    };
     return dispatch => {
         dispatch(addPostStart())
-        axios.post('/post/add-post', payload)
-            .then((response) => dispatch(addPostSuccess(response)) )
-            .catch((error) => dispatch(addPostFail(error)) )
-   };
+        axios.post('/post/add-post', {
+            header: { Authorization: token },
+            data: { payload: payload }
+        })
+            .then((response) => dispatch(addPostSuccess(response)))
+            .catch((error) => dispatch(addPostFail(error)))
+    };
 };
