@@ -6,14 +6,28 @@ import Buttons from './PostUI/buttons';
 
 
 const post = (props) => {
-    const { title, image, isMyPost } = props
+    const {
+        title,
+        userID,
+        postID,
+        token,
+        image,
+        handleAddFriend,
+        handleDeletePost,
+        isMyPost } = props
     return (
         <View style={styles.post}>
             <Text style={styles.title}>{title}</Text>
             <Image
                 style={styles.image}
                 source={{ uri: image }} />
-            <Buttons isMyPost={isMyPost} />
+            <Buttons
+                token={token}
+                postID={postID}
+                handleAddFriend={handleAddFriend}
+                handleDeletePost={handleDeletePost}
+                isMyPost={isMyPost}
+                userID={userID} />
         </View>
     );
 };

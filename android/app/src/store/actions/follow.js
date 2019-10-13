@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes';
-import { updateObject } from '../../utilityFunctions/utilityFunctions';
 import axios from '../../axios';
 
 

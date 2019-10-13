@@ -24,7 +24,12 @@ class Register extends Component {
         isFormValid: false,
         RegisterPage: true,
     };
-
+    componentDidUpdate() {
+        if (this.props.userID !== null) {
+            const { navigation } = this.props
+            return navigation.navigate('Login')
+        }
+    }
     changeValueHandler = (event, type) => {
         const value = event
         const validCheck = checkValid(value, this.state[type].rules)
@@ -37,7 +42,6 @@ class Register extends Component {
     submitRegisterHandler = () => {
         const email = this.state.email.value
         const password = this.state.password.value
-        const { navigation } = this.props
         if (this.state.isFormValid) {
             this.props.onRegister(email, password)
         };
@@ -75,9 +79,9 @@ const mapDispatchToProps = dispatch => {
 };
 const mapStateToProps = state => {
     return {
-        token: state.auth.token,
+        userID: state.auth.userID,
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.errorReg
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

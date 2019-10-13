@@ -8,7 +8,6 @@ const registerInput = (props) => {
             onChangeText={(event) => handleChangeValue(event, type)}
             style={styles.textInput}
             placeholder={placeholder}
-            autoCompleteType={type}
             secureTextEntry={type === 'password'}
         />
     );

@@ -13,7 +13,7 @@ export const mainStackNavigatorLogged = createStackNavigator({
         defaultNavigationOptions: {
             headerTintColor: 'black',
             headerStyle: {
-                backgroundColor: 'lightblue',
+                backgroundColor: 'black',
             },
         },
     }

@@ -11,11 +11,18 @@ class Dashboard extends Component {
         };
     }
     componentDidUpdate() {
-        console.log('Token', this.props.token)
-        console.log('posts', this.props.posts)
-        if (this.props.token && !this.props.posts) {
+        if (this.props.token && !this.props.posts && this.props.error === null) {
             this.props.onGetAllPosts(this.props.token)
         };
+        if (!this.props.token && this.props.posts) {
+            this.props.onRemovePosts()
+        }
+    };
+    addFriendHandler = (userID) => {
+        return this.props.onAddFriend(userID);
+    };
+    deletePostHandler = (postID, token) => {
+        return this.props.onDeletePost(postID, token)
     };
     render() {
         return (
@@ -23,7 +30,13 @@ class Dashboard extends Component {
                 <Text style={{ fontWeight: 'bold', fontSize: 27, marginBottom: 12 }}>All Posts</Text>
                 {
                     this.props.posts
-                        ? this.props.loading ? <ActivityIndicator size="large" color="#0000ff" /> : <Posts posts={this.props.posts} />
+                        ? this.props.loading
+                            ? <ActivityIndicator size="large" color="#0000ff" />
+                            : <Posts
+                                token={this.props.token}
+                                posts={this.props.posts}
+                                handleDeletePost={this.deletePostHandler}
+                                handleAddFriend={this.addFriendHandler}/>
                         : <Text>Please Login first :)</Text>
                 }
             </View>
@@ -33,14 +46,17 @@ class Dashboard extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetAllPosts: (token) => dispatch(actions.getAllPostsInit(token))
+        onGetAllPosts: (token) => dispatch(actions.getAllPostsInit(token)),
+        onAddFriend: (userID) => dispatch(actions.addFollowerInit(userID)),
+        onDeletePost: (postID, token) => dispatch(actions.deletePostInit(postID, token))
     };
 };
 const mapStateToProps = state => {
     return {
         token: state.auth.token,
         posts: state.dashboard.posts,
-        loading: state.dashboard.loading
+        loading: state.dashboard.loading,
+        error: state.dashboard.error
     }
 }
 

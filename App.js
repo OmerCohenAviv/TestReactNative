@@ -15,7 +15,7 @@ class App extends Component {
     }
     return (
       <View style={{ flex: 1 }}>
-        <StatusBar backgroundColor="lightblue" barStyle="light-content" />
+        <StatusBar backgroundColor='black' barStyle="light-content" />
         {AppContainerVar}
       </View>
     );

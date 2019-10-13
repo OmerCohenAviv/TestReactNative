@@ -23,10 +23,8 @@ export const Tabs = createMaterialTopTabNavigator({
         activeTintColor: Platform.OS === 'ios' ? 'yellow' : 'yellow',
         style: {
             height: 56,
-            color: 'black',
-            fontSize: 25,
             fontWeight: 'bold',
-            backgroundColor: Platform.OS === 'ios' ? 'lightgreen' : 'lightblue',
+            backgroundColor: Platform.OS === 'ios' ? 'lightgreen' : 'rgb(52, 67, 235)',
             shadowColor: 'rgba(0,0,0,0.24)',
             shadowOffset: {
                 width: 0,

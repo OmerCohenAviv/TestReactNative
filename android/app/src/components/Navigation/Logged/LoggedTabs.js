@@ -3,6 +3,7 @@ import { Platform } from 'react-native';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import Dashboard from '../../../containers/Dashboard/Dashboard';
 import Logout from '../../../containers/Logout/Logout';
+import AddPost from '../../../containers/AddPost/AddPost'
 
 
 
@@ -13,6 +14,12 @@ export const LoggedTabs = createMaterialTopTabNavigator({
         navigationOptions: {
             tabBarLabel: 'Home',
         },
+    },
+    AddNewPost: {
+        screen: AddPost,
+        navigationOptions: {
+            tabBarLabel: 'New Post'
+        }
     },
     Logout: {
         screen: Logout,
@@ -27,10 +34,8 @@ export const LoggedTabs = createMaterialTopTabNavigator({
         activeTintColor: Platform.OS === 'ios' ? 'yellow' : 'yellow',
         style: {
             height: 56,
-            color: 'black',
-            fontSize: 25,
             fontWeight: 'bold',
-            backgroundColor: Platform.OS === 'ios' ? 'lightgreen' : 'lightblue',
+            backgroundColor: Platform.OS === 'ios' ? 'lightgreen' : 'rgb(52, 67, 235)',
             shadowColor: 'rgba(0,0,0,0.24)',
             shadowOffset: {
                 width: 0,

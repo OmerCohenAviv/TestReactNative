@@ -4,13 +4,19 @@ import Icon from 'react-native-vector-icons/Entypo';
 import IconMaterial from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const buttons = (props) => {
-    const { isMyButton } = props
+    const {
+        isMyPost,
+        token,
+        handleDeletePost,
+        postID,
+        userID,
+        handleAddFriend } = props
     return (
         <View style={styles.buttons}>
             {
-                !isMyButton
+                !isMyPost
                     ? <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={styles.addBtn} >
+                        <TouchableOpacity style={styles.addBtn} onPress={() => handleAddFriend(userID)}>
                             <Text style={styles.buttonText}>
                                 Add Friend
                             </Text>
@@ -19,7 +25,7 @@ const buttons = (props) => {
                     </View>
 
                     : <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={styles.deleteBtn} >
+                        <TouchableOpacity style={styles.deleteBtn}  onPress={() => handleDeletePost(postID, token)}>
                             <Text style={styles.buttonText}>
                                 Delete Post
                             </Text>
