@@ -6,6 +6,7 @@ const posts = (props) => {
     const { posts } = props
     const _renderItem = ({ item }) => {
         return <Post
+            isMyPost={item.is_my_post}
             image={item.image_url}
             title={item.title}
             key={item.post_id} />

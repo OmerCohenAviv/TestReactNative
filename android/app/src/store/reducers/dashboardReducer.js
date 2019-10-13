@@ -7,20 +7,23 @@ const initalState = {
 
 
 const dashboardReducer = (state = initalState, actions) => {
-    console.log(actions.type)
-    switch(actions.type) {
-        case(actionTypes.GET_ALL_POSTS_START): {
-          return updateObject(state, {loading: true})
-        }
-        case(actionTypes.GET_ALL_POSTS_SUCCESS): {
-            return updateObject(state, {loading: false, posts: actions.posts})
-        }
-        case(actionTypes.GET_ALL_POSTS_FAIL): {
-            return updateObject(state, {loading: false})
-        }
+    switch (actions.type) {
+        case (actionTypes.GET_ALL_POSTS_START): { return updateObject(state, { loading: true }) }
+        case (actionTypes.GET_ALL_POSTS_SUCCESS): { return updateObject(state, { loading: false, posts: actions.posts }) }
+        case (actionTypes.GET_ALL_POSTS_FAIL): { return updateObject(state, { loading: false }) }
+
+
+        case (actionTypes.ADD_POST_START): { return updateObject(state, { loading: true }) }
+        case (actionTypes.ADD_POST_SUCCESS): { return updateObject(state, { loading: false }) }
+        case (actionTypes.ADD_POST_FAIL): { return updateObject(state, { loading: false }) }
+
+        case (actionTypes.DELETE_POST_START): { return updateObject(state, { loading: true }) }
+        case (actionTypes.DELETE_POST_SUCCESS): { return updateObject(state, { loading: false }) }
+        case (actionTypes.DELETE_POST_FAIL): { return updateObject(state, { loading: false }) }
+
         default:
             return state;
     };
 };
 
-export default dashboardReducer;
+export default dashboardReducer;    

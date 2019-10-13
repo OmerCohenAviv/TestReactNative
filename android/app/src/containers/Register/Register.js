@@ -37,6 +37,7 @@ class Register extends Component {
     submitRegisterHandler = () => {
         const email = this.state.email.value
         const password = this.state.password.value
+        const { navigation } = this.props
         if (this.state.isFormValid) {
             this.props.onRegister(email, password)
         };
@@ -46,10 +47,13 @@ class Register extends Component {
         return navigation.navigate('Login')
     }
     render() {
+        const { loading, error } = this.props
         return (
             <View style={{ flex: 1 }}>
                 <RegForm
                     title='Register'
+                    loading={loading}
+                    error={error}
                     handleChangeValue={this.changeValueHandler}
                     email={this.state.email}
                     password={this.state.password}
@@ -71,7 +75,9 @@ const mapDispatchToProps = dispatch => {
 };
 const mapStateToProps = state => {
     return {
-        token: state.auth.token
+        token: state.auth.token,
+        loading: state.auth.loading,
+        error: state.auth.error
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

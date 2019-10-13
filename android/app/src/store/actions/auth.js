@@ -19,7 +19,7 @@ const registerUserSuccess = (response) => {
 const registerUserFail = (error) => {
     return {
         type: actionTypes.REGISTER_USER_FAIL,
-        error: error
+        error: error.response.data.message
     };
 };
 export const registerUserInit = (email, password) => {
@@ -43,10 +43,8 @@ const loginUserStart = () => {
     };
 };
 const loginUserSuccess = (response) => {
-    console.log(response)
     const userID = response.data.data.user_id
     const token = response.data.data.token
-    console.log(token)
     return {
         type: actionTypes.LOGIN_USER_SUCCESS,
         userID: userID,
@@ -54,9 +52,10 @@ const loginUserSuccess = (response) => {
     };
 };
 const loginUserFail = (error) => {
+    
     return {
         type: actionTypes.LOGIN_USER_FAIL,
-        error: error
+        error: error.response.data.message
     };
 };
 export const loginUserInit = (email, password) => {

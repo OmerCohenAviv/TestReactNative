@@ -6,5 +6,7 @@ export {
 
 
 export {
+    addPostInit,
+    deletePostInit,
     getAllPostsInit
 } from './dashboard'

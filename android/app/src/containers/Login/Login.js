@@ -44,15 +44,18 @@ class Login extends Component {
     this.props.onLogin(email, password)
   };
   render() {
+    const { loading, error } = this.props
     return (
       <View style={{ flex: 1 }}>
         <LogForm
           title='Login'
+          loading={loading}
           email={this.state.email}
           password={this.state.password}
           isFormValid={this.state.isFormValid}
           handleSubmit={this.submitLoginHandler}
           handleChangeValue={this.changeValueHandler}
+          error={error}
         />
       </View>
     );
@@ -66,7 +69,9 @@ const mapDispatchToProps = dispatch => {
 };
 const mapStateToProps = state => {
   return {
-    token: state.auth.token
+    token: state.auth.token,
+    loading: state.auth.loading,
+    error: state.auth.error
   }
 }
 

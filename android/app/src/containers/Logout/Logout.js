@@ -6,9 +6,7 @@ import * as actions from '../../store/actions/index';
 
 class Logout extends Component {
     // componentDidMount() {
-    //     const { navigation } = this.props
     //     this.props.onLogout()
-    //     navigation.navigate('Home')
     // }
     render() {
         return (

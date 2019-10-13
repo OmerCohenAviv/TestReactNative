@@ -5,10 +5,14 @@ import { mainStackNavigatorLogged } from './android/app/src/components/Navigatio
 import { createAppContainer } from 'react-navigation';
 import { connect } from 'react-redux';
 
-let AppContainerComp = createAppContainer(mainStackNavigator)
+let AppContainerDefault = createAppContainer(mainStackNavigator)
+let AppContainerAuthenticate = createAppContainer(mainStackNavigatorLogged)
 class App extends Component {
   render() {
-    AppContainerVar = <AppContainerComp />
+    let AppContainerVar = <AppContainerDefault />
+    if (this.props.token) {
+      AppContainerVar = <AppContainerAuthenticate/>
+    }
     return (
       <View style={{ flex: 1 }}>
         <StatusBar backgroundColor="lightblue" barStyle="light-content" />
