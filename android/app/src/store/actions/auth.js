@@ -1,28 +1,24 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios'
-import { AsyncStorage } from 'react-native'
+import AsyncStorage from '@react-native-community/async-storage'
 
 const registerUserStart = () => {
     return { type: actionTypes.REGISTER_USER_START };
 };
-
 const registerUserSuccess = (response) => {
     const userID = response.data.data.user_id
-    const token = response.data.data.token
     return {
         type: actionTypes.REGISTER_USER_SUCCESS,
-        userID: userID,
-        token: token
+        userID: userID
     }
 };
-
 const registerUserFail = (error) => {
+    console.log(error.message)
     return {
         type: actionTypes.REGISTER_USER_FAIL,
-        error: error.response.data.message
+        error: error.message
     };
 };
-
 export const registerUserInit = (email, password) => {
     const data = {
         email: email,
@@ -43,7 +39,6 @@ const loginUserStart = () => {
         type: actionTypes.LOGIN_USER_START
     };
 };
-
 const loginUserSuccess = (response, email, password) => {
     const userID = response.data.data.user_id
     const token = response.data.data.token
@@ -55,14 +50,13 @@ const loginUserSuccess = (response, email, password) => {
         token: token
     };
 };
-
 const loginUserFail = (error) => {
+    console.log('fail')
     return {
         type: actionTypes.LOGIN_USER_FAIL,
         error: error.response.data.message
     };
 };
-
 export const loginUserInit = (email, password) => {
     const data = {
         email: email,
@@ -84,10 +78,10 @@ export const autoLogin = (email, password) => {
     };
     return dispatch => {
         axios.post('/usr/login', data)
-        .then( (response) => dispatch(loginUserSuccess(response, email, password) ))
+            .then((response) => dispatch(loginUserSuccess(response, email, password)))
+            .catch( (error) => console.log(error))
     }
 }
-
 export const logoutUser = () => {
     AsyncStorage.removeItem('email')
     AsyncStorage.removeItem('password')

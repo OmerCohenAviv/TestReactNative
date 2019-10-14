@@ -10,11 +10,11 @@ initalState = {
 };
 const authReducer = (state = initalState, actions) => {
     switch (actions.type) {
-        case (actionTypes.REGISTER_USER_START): return updateObject(state, { loading: true })
+        case (actionTypes.REGISTER_USER_START): return updateObject(state, { loading: true, errorReg: null})
         case (actionTypes.REGISTER_USER_SUCCESS): {
             return updateObject(state, {
                 loading: false,
-                userID: actions.userID
+                userID: actions.userID,
             });
         }
         case (actionTypes.REGISTER_USER_FAIL): return updateObject(state, { loading: false, errorReg: actions.error })

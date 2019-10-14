@@ -4,7 +4,6 @@ import axios from '../../axios';
 const getAllPostsStart = () => {
     return { type: actionTypes.GET_ALL_POSTS_START }
 };
-
 const getAllPostsSuccess = (response) => {
     const posts = response.data.data
     return {
@@ -12,15 +11,14 @@ const getAllPostsSuccess = (response) => {
         posts
     };
 };
-
 const getAllPostsFail = (error) => {
     return {
         type: actionTypes.GET_ALL_POSTS_FAIL,
         error
     };
 };
-
 export const getAllPostsInit = (token) => {
+    console.log(token)
     return dispatch => {
         dispatch(getAllPostsStart())
         axios.get(

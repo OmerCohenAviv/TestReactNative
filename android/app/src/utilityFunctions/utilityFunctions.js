@@ -1,4 +1,5 @@
-import { AsyncStorage } from 'react-native'
+
+import AsyncStorage  from '@react-native-community/async-storage'
 
 export const updateObject = (oldObj, updatedParam) => {
     return {
@@ -17,12 +18,13 @@ export const checkValid = (value, rules) => {
 export async function getEmail() {
     return await AsyncStorage.getItem('email')
     .then((email) => email)
-    .catch((error) => error)
+    .catch((error) => console.log(error))
 };
 
 export async function getPassword() {
     return await AsyncStorage.getItem('password')
     .then((password) => password)
-    .catch((error) => error)
+    .catch((error) => console.log(error))
 };
+
 

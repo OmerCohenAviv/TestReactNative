@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, AsyncStorage } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { mainStackNavigator } from './android/app/src/components/Navigation/Stack';
 import { mainStackNavigatorLogged } from './android/app/src/components/Navigation/Logged/LoggedStack';
 import { createAppContainer } from 'react-navigation';
@@ -17,10 +17,8 @@ class App extends Component {
           this.props.onAutoLogin(email,password)
         })
       })
-    
-      
-    }
-  }
+    };
+  };
   render() {
     let AppContainerVar = <AppContainerDefault />
     if (this.props.token) {

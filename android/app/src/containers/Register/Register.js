@@ -25,9 +25,9 @@ class Register extends Component {
         RegisterPage: true,
     };
     componentDidUpdate() {
-        if (this.props.userID !== null) {
-            const { navigation } = this.props
-            return navigation.navigate('Login')
+        const { navigation } = this.props
+        if (!this.props.errorReg && this.props.userID) {
+            return navigation.navigate('Login') 
         }
     }
     changeValueHandler = (value, type) => {
@@ -43,6 +43,15 @@ class Register extends Component {
         const password = this.state.password.value
         if (this.state.isFormValid) {
             this.props.onRegister(email, password)
+            const updateEmail = {
+                ...this.state.email,
+                valid: false
+            }
+            const updatePassword = {
+                ...this.state.password,
+                valid: false
+            }
+            this.setState({isFormValid: false, email: updateEmail, password: updatePassword})
         };
     };
     switchToLoginPage = () => {
@@ -50,13 +59,13 @@ class Register extends Component {
         return navigation.navigate('Login')
     }
     render() {
-        const { loading, error } = this.props
+        const { loading, errorReg } = this.props
         return (
             <View style={{ flex: 1 }}>
                 <RegForm
                     title='Register'
                     loading={loading}
-                    error={error}
+                    error={errorReg}
                     handleChangeValue={this.changeValueHandler}
                     email={this.state.email}
                     password={this.state.password}
@@ -67,7 +76,7 @@ class Register extends Component {
                 />
             </View>
         );
-    };
+    }
 };
 
 const mapDispatchToProps = dispatch => {
@@ -79,7 +88,8 @@ const mapStateToProps = state => {
     return {
         userID: state.auth.userID,
         loading: state.auth.loading,
-        error: state.auth.errorReg
+        errorReg: state.auth.errorReg,
+        token: state.auth.token
     };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
