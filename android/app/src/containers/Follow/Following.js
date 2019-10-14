@@ -9,7 +9,6 @@ class Following extends Component {
     };
 
     render() {
-        console.log(this.props.following)
         let IFollow = <ActivityIndicator />
         if (this.props.following) {
             IFollow = this.props.following.map(follower => {

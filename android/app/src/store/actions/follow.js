@@ -76,7 +76,6 @@ const getWhoIFollowStart = () => {
 };
 
 const getWhoIFollowSuccess = (following) => {
-    console.log(following)
     const WhoIFollow = following.data.data
 
     return {

@@ -69,7 +69,6 @@ const deletePostStart = () => {
 };
 
 const deletePostSuccess = (response) => {
-    console.log(response.data)
     return { type: actionTypes.DELETE_POST_SUCCESS }
 };
 
@@ -101,7 +100,6 @@ const addPostStart = () => {
 };
 
 const addPostSuccess = (post) => {
-    console.log(post.data.data[0])
     const postDataObj =  {
         ...post.data.data[0],
         is_my_post:true
@@ -113,7 +111,6 @@ const addPostSuccess = (post) => {
 };
 
 const addPostFail = (error) => {
-    console.log(error)
     return {
         type: actionTypes.ADD_POST_FAIL,
         error
