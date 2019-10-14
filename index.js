@@ -13,7 +13,7 @@ import followReducer from './android/app/src/store/reducers/followReducer';
 const combinedReducers = combineReducers({
     auth: authReducer,
     dashboard: dashboardReducer,
-    followReducer
+    follow: followReducer
 });
 
 const store = createStore(combinedReducers, composeWithDevTools(

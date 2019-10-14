@@ -7,16 +7,14 @@ import WarningButton from '../../components/UI/Buttons/WarningBtn/WarningBtn';
 
 
 class Logout extends Component {
-
-
-    logoutHandler = () => {
-        
-        return this.props.onLogout()
-    }
+    logoutHandler = () => {  
+         this.props.onLogout()
+         this.props.onRemoveAllPosts()
+    };
     cancelLogoutHandler = () => {
         const { navigation } = this.props
         navigation.navigate('Dashboard');
-    }
+    };
     render() {
         return (
             <View style={styles.container}>
@@ -56,7 +54,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogout: () => dispatch(actions.logoutUser())
+        onLogout: () => dispatch(actions.logoutUser()),
+        onRemoveAllPosts: () => dispatch(actions.removeAllPosts())
     }
 }
 

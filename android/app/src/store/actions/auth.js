@@ -2,12 +2,10 @@ import * as actionTypes from './actionTypes';
 import axios from '../../axios'
 
 const registerUserStart = () => {
-    return {
-        type: actionTypes.REGISTER_USER_START
-    };
+    return { type: actionTypes.REGISTER_USER_START };
 };
+
 const registerUserSuccess = (response) => {
-    
     const userID = response.data.data.user_id
     const token = response.data.data.token
     return {
@@ -16,12 +14,14 @@ const registerUserSuccess = (response) => {
         token: token
     }
 };
+
 const registerUserFail = (error) => {
     return {
         type: actionTypes.REGISTER_USER_FAIL,
         error: error.response.data.message
     };
 };
+
 export const registerUserInit = (email, password) => {
     const data = {
         email: email,
@@ -30,8 +30,8 @@ export const registerUserInit = (email, password) => {
     return dispatch => {
         dispatch(registerUserStart())
         axios.post('/usr/register', data)
-            .then( (response) => dispatch(registerUserSuccess(response) ))
-            .catch( (error) => dispatch(registerUserFail(error) ))
+            .then((response) => dispatch(registerUserSuccess(response)))
+            .catch((error) => dispatch(registerUserFail(error)))
     };
 };
 
@@ -42,6 +42,7 @@ const loginUserStart = () => {
         type: actionTypes.LOGIN_USER_START
     };
 };
+
 const loginUserSuccess = (response) => {
     const userID = response.data.data.user_id
     const token = response.data.data.token
@@ -51,13 +52,14 @@ const loginUserSuccess = (response) => {
         token: token
     };
 };
+
 const loginUserFail = (error) => {
-    
     return {
         type: actionTypes.LOGIN_USER_FAIL,
         error: error.response.data.message
     };
 };
+
 export const loginUserInit = (email, password) => {
     const data = {
         email: email,
@@ -73,7 +75,6 @@ export const loginUserInit = (email, password) => {
 
 
 export const logoutUser = () => {
-    return {
-        type: actionTypes.LOGOUT_USER
-    };
-};
+    return { type: actionTypes.LOGOUT_USER }
+        ;
+}

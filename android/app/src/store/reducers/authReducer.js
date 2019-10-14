@@ -1,7 +1,6 @@
 import * as actionTypes from '../actions/actionTypes';
 import { updateObject } from '../../utilityFunctions/utilityFunctions';
 
-
 initalState = {
     token: null,
     userID: null,
@@ -9,8 +8,6 @@ initalState = {
     error: null,
     errorReg: null,
 };
-
-
 const authReducer = (state = initalState, actions) => {
     switch (actions.type) {
         case (actionTypes.REGISTER_USER_START): return updateObject(state, { loading: true })
@@ -31,7 +28,7 @@ const authReducer = (state = initalState, actions) => {
             });
         }
         case (actionTypes.LOGIN_USER_FAIL): return updateObject(state, { loading: false, error: actions.error })
-         case (actionTypes.LOGOUT_USER): return updateObject(state, {
+        case (actionTypes.LOGOUT_USER): return updateObject(state, {
             token: null,
             userID: null,
         })

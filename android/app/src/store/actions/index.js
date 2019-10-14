@@ -1,19 +1,19 @@
 export {
-    registerUserInit,
-    loginUserInit,
-    logoutUser
+    registerUserInit, //Register
+    loginUserInit, //Login
+    logoutUser, //Logout
 } from './auth'
 
-
 export {
-    getMyPostsInit,
-    addPostInit,
-    deletePostInit,
-    getAllPostsInit
+    getMyPostsInit, //Getting user posts
+    addPostInit,   // adding a post
+    deletePostInit, // Deleting a post
+    getAllPostsInit, //Getting all posts
+    removeAllPosts
 } from './dashboard'
 
 export {
-    getMyFollowersInit,
-    getWhoIFollowInit,
-    addFollowerInit
+    getMyFollowersInit, //Getting Logged User Followers
+    getWhoIFollowInit, //Getting who is logged user following
+    addFollowerInit    // adding a follower 
 } from './follow'

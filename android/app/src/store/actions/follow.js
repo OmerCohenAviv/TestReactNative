@@ -5,55 +5,95 @@ import axios from '../../axios';
 const addFollowerStart = () => {
     return { type: actionTypes.ADD_FOLLOWER_START }
 };
-const addFollowerSuccess = () => {
+
+const addFollowerSuccess = (response) => {
     return { type: actionTypes.ADD_FOLLOWER_SUCCESS }
 };
-const addFollowerFail = () => {
-    return { type: actionTypes.ADD_FOLLOWER_FAIL }
+
+const addFollowerFail = (error) => {
+    return {
+        type: actionTypes.ADD_FOLLOWER_FAIL,
+        error
+    };
 };
-export const addFollowerInit = (userID) => {
+
+export const addFollowerInit = (userID, token) => {
     return dispatch => {
         dispatch(addFollowerStart())
-        axios.post('/follower/add-follower', userID)
-            .then((response) => dispatch(addFollowerSuccess(response)))
-            .catch((error) => dispatch(addFollowerFail(error)))
-    }
-}
+        const config = {
+            headers: { 'Authorization': token }
+        };
+        const bodyParameters = {
+            f_user_id: userID
+        }
+        axios.post('/follower/add-follower',
+            bodyParameters,
+            config
+        )
+            .then((response) => dispatch( addFollowerSuccess(response) ))
+            .catch((error) => dispatch( addFollowerFail(error) ))
+    };
+};
+
 
 
 const getMyFollowersStart = () => {
     return { type: actionTypes.GET_MY_FOLLOWERS_START }
 };
-const getMyFollowersSuccess = () => {
-    return { type: actionTypes.GET_MY_FOLLOWERS_SUCCESS }
+
+const getMyFollowersSuccess = (myFollowers) => {
+    const myFollowersData = myFollowers.data.data
+    
+    return {
+        type: actionTypes.GET_MY_FOLLOWERS_SUCCESS,
+        myFollowersData
+    };
 };
-const getMyFollowersFail = () => {
-    return { type: actionTypes.GET_MY_FOLLOWERS_FAIL }
+
+const getMyFollowersFail = (error) => {
+    return {
+        type: actionTypes.GET_MY_FOLLOWERS_FAIL,
+        error
+    };
 };
-export const getMyFollowersInit = (userID) => {
+
+export const getMyFollowersInit = (token) => {
     return dispatch => {
         dispatch(getMyFollowersStart())
-        axios.get('/follower/get-my-followers', userID)
-            .then((response) => dispatch(getMyFollowersSuccess(response)))
-            .catch((error) => dispatch(getMyFollowersFail(error)))
-    }
-}
+        axios.get('/follower/get-my-followers',
+            {
+                headers: { "Authorization": token }
+            })
+            .then((myFollowers) => dispatch( getMyFollowersSuccess(myFollowers) ))
+            .catch((error) => dispatch( getMyFollowersFail(error) ))
+    };
+};
+
 
 
 const getWhoIFollowStart = () => {
     return { type: actionTypes.GET_WHO_I_FOLLOW_START }
 };
-const getWhoIFollowSuccess = () => {
-    return { type: actionTypes.GET_WHO_I_FOLLOW_SUCCESS }
+
+const getWhoIFollowSuccess = (following) => {
+    return {
+        type: actionTypes.GET_WHO_I_FOLLOW_SUCCESS,
+        following
+    }
 };
-const getWhoIFollowFail = () => {
-    return { type: actionTypes.GET_WHO_I_FOLLOW_FAIL }
+
+const getWhoIFollowFail = (error) => {
+    return {
+        type: actionTypes.GET_WHO_I_FOLLOW_FAIL,
+        error
+    }
 };
+
 export const getWhoIFollowInit = (userID) => {
     return dispatch => {
         dispatch(getWhoIFollowStart())
         axios.post('/follower/add-follower', userID)
-            .then((response) => dispatch(getWhoIFollowSuccess(response)))
-            .catch((error) => dispatch(getWhoIFollowFail(error)))
-    }
-}
+            .then((following) => dispatch( getWhoIFollowSuccess(following) ))
+            .catch((error) => dispatch( getWhoIFollowFail(error) ))
+    };
+};

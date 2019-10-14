@@ -30,8 +30,7 @@ class Register extends Component {
             return navigation.navigate('Login')
         }
     }
-    changeValueHandler = (event, type) => {
-        const value = event
+    changeValueHandler = (value, type) => {
         const validCheck = checkValid(value, this.state[type].rules)
         const updatedInput = updateObject(this.state[type], { value: value, valid: validCheck })
         this.setState({ [type]: updatedInput }, () => {
@@ -74,7 +73,6 @@ class Register extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         onRegister: (email, password) => dispatch(actions.registerUserInit(email, password)),
-        onLogin: () => dispatch(actions.loginUserInit())
     };
 };
 const mapStateToProps = state => {
@@ -82,6 +80,6 @@ const mapStateToProps = state => {
         userID: state.auth.userID,
         loading: state.auth.loading,
         error: state.auth.errorReg
-    }
-}
+    };
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

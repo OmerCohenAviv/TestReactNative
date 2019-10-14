@@ -11,18 +11,18 @@ class Dashboard extends Component {
         };
     }
     componentDidUpdate() {
-        if (this.props.token && !this.props.posts && this.props.error === null) {
+        if (this.props.token && !this.props.posts && this.props.error === null ||  this.props.deleted) {
             this.props.onGetAllPosts(this.props.token)
         };
         if (!this.props.token && this.props.posts) {
             this.props.onRemovePosts()
         }
     };
-    addFriendHandler = (userID) => {
-        return this.props.onAddFriend(userID);
+    addFriendHandler = (userID, token) => {
+        return this.props.onAddFriend(userID, token);
     };
     deletePostHandler = (postID, token) => {
-        return this.props.onDeletePost(postID, token)
+        this.props.onDeletePost(postID, token)
     };
     render() {
         return (
@@ -36,8 +36,8 @@ class Dashboard extends Component {
                                 token={this.props.token}
                                 posts={this.props.posts}
                                 handleDeletePost={this.deletePostHandler}
-                                handleAddFriend={this.addFriendHandler}/>
-                        : <Text>Please Login first :)</Text>
+                                handleAddFriend={this.addFriendHandler} />
+                        : <Text>Please Login first </Text>
                 }
             </View>
         );
@@ -47,7 +47,7 @@ class Dashboard extends Component {
 const mapDispatchToProps = dispatch => {
     return {
         onGetAllPosts: (token) => dispatch(actions.getAllPostsInit(token)),
-        onAddFriend: (userID) => dispatch(actions.addFollowerInit(userID)),
+        onAddFriend: (userID, token) => dispatch(actions.addFollowerInit(userID, token)),
         onDeletePost: (postID, token) => dispatch(actions.deletePostInit(postID, token))
     };
 };
@@ -56,7 +56,8 @@ const mapStateToProps = state => {
         token: state.auth.token,
         posts: state.dashboard.posts,
         loading: state.dashboard.loading,
-        error: state.dashboard.error
+        error: state.dashboard.error,
+        deleted: state.dashboard.deleted
     }
 }
 

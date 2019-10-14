@@ -16,7 +16,7 @@ const buttons = (props) => {
             {
                 !isMyPost
                     ? <View style={{ flexDirection: 'row' }}>
-                        <TouchableOpacity style={styles.addBtn} onPress={() => handleAddFriend(userID)}>
+                        <TouchableOpacity style={styles.addBtn} onPress={() => handleAddFriend(userID, token)}>
                             <Text style={styles.buttonText}>
                                 Add Friend
                             </Text>

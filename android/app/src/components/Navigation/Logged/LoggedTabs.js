@@ -3,7 +3,8 @@ import { Platform } from 'react-native';
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import Dashboard from '../../../containers/Dashboard/Dashboard';
 import Logout from '../../../containers/Logout/Logout';
-import AddPost from '../../../containers/AddPost/AddPost'
+import AddPost from '../../../containers/AddPost/AddPost';
+import Follow from '../../../containers/Follow/Follow';
 
 
 
@@ -14,6 +15,12 @@ export const LoggedTabs = createMaterialTopTabNavigator({
         navigationOptions: {
             tabBarLabel: 'Home',
         },
+    },
+    Follow: {
+        screen: Follow,
+        navigationOptions: {
+            tabBarLabel: 'Follow'
+        }
     },
     AddNewPost: {
         screen: AddPost,
