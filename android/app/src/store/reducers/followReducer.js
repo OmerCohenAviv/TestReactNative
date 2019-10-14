@@ -11,13 +11,13 @@ const initalState = {
 
 const followReducer = (state = initalState, actions) => {
     switch (actions.type) {
-        case (actionsTypes.ADD_FOLLOWER_START): return   updateObject(state, { loading: true })
+        case (actionsTypes.ADD_FOLLOWER_START): return updateObject(state, { loading: true })
 
         case (actionsTypes.ADD_FOLLOWER_SUCCESS): return updateObject(state, { loading: false })
 
-        case (actionsTypes.ADD_FOLLOWER_FAIL): return    updateObject(state, { loading: false })
+        case (actionsTypes.ADD_FOLLOWER_FAIL): return updateObject(state, { loading: false })
 
-        case (actionsTypes.GET_MY_FOLLOWERS_START): return updateObject(state, { loading: true})
+        case (actionsTypes.GET_MY_FOLLOWERS_START): return updateObject(state, { loading: true })
         case (actionsTypes.GET_MY_FOLLOWERS_SUCCESS): return updateObject(state, {
             loading: false,
             followers: actions.myFollowersData
@@ -26,7 +26,16 @@ const followReducer = (state = initalState, actions) => {
             loading: false,
             error: actions.error
         })
-        
+        case (actionsTypes.GET_WHO_I_FOLLOW_START): return updateObject(state, { loading: true })
+        case (actionsTypes.GET_WHO_I_FOLLOW_SUCCESS): return updateObject(state, {
+            loading: false,
+            following: actions.WhoIFollow
+        })
+        case (actionsTypes.GET_WHO_I_FOLLOW_FAIL): return updateObject(state, {
+            loading: false,
+            error: actions.error
+        })
+
         default: {
             return state
         };

@@ -25,7 +25,8 @@ export const LoggedTabs = createMaterialTopTabNavigator({
     AddNewPost: {
         screen: AddPost,
         navigationOptions: {
-            tabBarLabel: 'New Post'
+            tabBarLabel: 'New Post',
+
         }
     },
     Logout: {
@@ -38,7 +39,7 @@ export const LoggedTabs = createMaterialTopTabNavigator({
 
 }, {
     tabBarOptions: {
-        activeTintColor: Platform.OS === 'ios' ? 'yellow' : 'yellow',
+        activeTintColor: Platform.OS === 'ios' ? 'yellow' : 'white',
         style: {
             height: 56,
             fontWeight: 'bold',

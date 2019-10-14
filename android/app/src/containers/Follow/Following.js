@@ -1,35 +1,28 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
-import Btn from '../../components/UI/Buttons/PrimaryBtn/PrimaryBtn'
 import * as actions from '../../store/actions/index';
 
-class Follow extends Component {
+class Following extends Component {
     componentDidMount() {
-        this.props.onGetMyFollowers(this.props.token)
-    }
-    switchToFollowingHandler = () => {
-        const { navigation } = this.props
-        return navigation.navigate('Following')
-    }
+        this.props.onGetWhoIFollow(this.props.token)
+    };
+
     render() {
-        let myFollowers = <ActivityIndicator />
-        if (this.props.followers) {
-             myFollowers = this.props.followers.map(follower => {
+        console.log(this.props.following)
+        let IFollow = <ActivityIndicator />
+        if (this.props.following) {
+            IFollow = this.props.following.map(follower => {
                 return <Text key={follower.email} style={styles.followerText}>{follower.email}</Text>
             })
         }
         return (
             <View style={styles.conatiner}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>My Followers </Text>
-                </View>
-                <View>
-                    <Btn btnText={'Back'} handleSubmit={this.switchToFollowingHandler} />
-            
+                    <Text style={styles.titleText}>Who I am Following </Text>
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 14 }}>
-                    {myFollowers}
+                    {IFollow}
                 </View>
             </View>
         );
@@ -57,15 +50,15 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
     return {
-        onGetMyFollowers: (token) => dispatch(actions.getMyFollowersInit(token))
+        onGetWhoIFollow: (token) => dispatch(actions.getWhoIFollowInit(token))
     };
 };
 
 const mapStateToProps = state => {
     return {
         token: state.auth.token,
-        followers: state.follow.followers
+        following: state.follow.following
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Follow);
+export default connect(mapStateToProps, mapDispatchToProps)(Following);

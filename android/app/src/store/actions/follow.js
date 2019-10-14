@@ -30,8 +30,8 @@ export const addFollowerInit = (userID, token) => {
             bodyParameters,
             config
         )
-            .then((response) => dispatch( addFollowerSuccess(response) ))
-            .catch((error) => dispatch( addFollowerFail(error) ))
+            .then((response) => dispatch(addFollowerSuccess(response)))
+            .catch((error) => dispatch(addFollowerFail(error)))
     };
 };
 
@@ -43,7 +43,7 @@ const getMyFollowersStart = () => {
 
 const getMyFollowersSuccess = (myFollowers) => {
     const myFollowersData = myFollowers.data.data
-    
+
     return {
         type: actionTypes.GET_MY_FOLLOWERS_SUCCESS,
         myFollowersData
@@ -64,8 +64,8 @@ export const getMyFollowersInit = (token) => {
             {
                 headers: { "Authorization": token }
             })
-            .then((myFollowers) => dispatch( getMyFollowersSuccess(myFollowers) ))
-            .catch((error) => dispatch( getMyFollowersFail(error) ))
+            .then((myFollowers) => dispatch(getMyFollowersSuccess(myFollowers)))
+            .catch((error) => dispatch(getMyFollowersFail(error)))
     };
 };
 
@@ -76,9 +76,12 @@ const getWhoIFollowStart = () => {
 };
 
 const getWhoIFollowSuccess = (following) => {
+    console.log(following)
+    const WhoIFollow = following.data.data
+
     return {
         type: actionTypes.GET_WHO_I_FOLLOW_SUCCESS,
-        following
+        WhoIFollow
     }
 };
 
@@ -89,11 +92,14 @@ const getWhoIFollowFail = (error) => {
     }
 };
 
-export const getWhoIFollowInit = (userID) => {
+export const getWhoIFollowInit = (token) => {
     return dispatch => {
         dispatch(getWhoIFollowStart())
-        axios.post('/follower/add-follower', userID)
-            .then((following) => dispatch( getWhoIFollowSuccess(following) ))
-            .catch((error) => dispatch( getWhoIFollowFail(error) ))
+        axios.get('/follower/get-followers-by-user-id',
+            {
+                headers: { "Authorization": token }
+            })
+            .then((following) => dispatch(getWhoIFollowSuccess(following)))
+    .catch((error) => dispatch(getWhoIFollowFail(error)))
     };
 };
