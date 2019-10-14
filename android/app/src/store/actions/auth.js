@@ -77,6 +77,17 @@ export const loginUserInit = (email, password) => {
 };
 
 
+export const autoLogin = (email, password) => {
+    const data = {
+        email: email,
+        password: password
+    };
+    return dispatch => {
+        axios.post('/usr/login', data)
+        .then( (response) => dispatch(loginUserSuccess(response, email, password) ))
+    }
+}
+
 export const logoutUser = () => {
     AsyncStorage.removeItem('email')
     AsyncStorage.removeItem('password')

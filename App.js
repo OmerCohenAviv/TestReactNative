@@ -14,7 +14,7 @@ class App extends Component {
     if (!this.props.token && !this.props.userID) {
       getEmail().then((email) => {
         getPassword().then((password) => {
-          this.props.onLogin(email,password)
+          this.props.onAutoLogin(email,password)
         })
       })
     
@@ -37,7 +37,7 @@ class App extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onLogin: (email, password) => dispatch(actions.loginUserInit(email, password))
+    onAutoLogin: (email, password) => dispatch(actions.autoLogin(email, password))
   }
 }
 const mapStateToProps = state => {

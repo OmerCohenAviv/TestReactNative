@@ -2,6 +2,7 @@ export {
     registerUserInit, //Register
     loginUserInit, //Login
     logoutUser, //Logout
+    autoLogin
 } from './auth'
 
 export {
