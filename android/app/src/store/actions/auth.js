@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes';
 import axios from '../../axios'
+import { AsyncStorage } from 'react-native'
 
 const registerUserStart = () => {
     return { type: actionTypes.REGISTER_USER_START };
@@ -43,9 +44,11 @@ const loginUserStart = () => {
     };
 };
 
-const loginUserSuccess = (response) => {
+const loginUserSuccess = (response, email, password) => {
     const userID = response.data.data.user_id
     const token = response.data.data.token
+    AsyncStorage.setItem('email', email)
+    AsyncStorage.setItem('password', password)
     return {
         type: actionTypes.LOGIN_USER_SUCCESS,
         userID: userID,
@@ -68,13 +71,14 @@ export const loginUserInit = (email, password) => {
     return dispatch => {
         dispatch(loginUserStart())
         axios.post('/usr/login', data)
-            .then((response) => dispatch(loginUserSuccess(response)))
+            .then((response) => dispatch(loginUserSuccess(response, email, password)))
             .catch((error) => dispatch(loginUserFail(error)))
     };
 };
 
 
 export const logoutUser = () => {
+    AsyncStorage.removeItem('email')
+    AsyncStorage.removeItem('password')
     return { type: actionTypes.LOGOUT_USER }
-        ;
-}
+};
