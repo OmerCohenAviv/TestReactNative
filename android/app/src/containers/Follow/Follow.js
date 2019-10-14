@@ -24,8 +24,8 @@ class Follow extends Component {
                 <View style={styles.titleContainer}>
                     <Text style={styles.titleText}>My Followers </Text>
                 </View>
-                <View>
-                    <Btn btnText={'Back'} handleSubmit={this.switchToFollowingHandler} />
+                <View style={{marginTop:10}}>
+                    <Btn btnText={'People I Follow'} handleSubmit={this.switchToFollowingHandler} />
             
                 </View>
                 <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 14 }}>

@@ -14,12 +14,11 @@ class AddPost extends Component {
     changeValueHandler = (event, type) => {
         this.setState({ [type]: event })
     }
-     submitPostHandler = () => {
-        const {title, image } = this.state
-        const {navigation, token} = this.props
+    submitPostHandler = () => {
+        const { title, image } = this.state
+        const { navigation, token } = this.props
         this.props.onAddPost(title, image, token)
-        return navigation.navigate('Dashboard')
-
+        navigation.navigate('Dashboard')
     }
     render() {
         return (
@@ -34,7 +33,7 @@ class AddPost extends Component {
                 </View>
                 <PrimaryBtn
                     btnText='Submit'
-                    handleSubmit={ () => this.submitPostHandler()}
+                    handleSubmit={() => this.submitPostHandler()}
                     disable={this.state.title === '' || this.state.image === ''} />
             </View>
         );
