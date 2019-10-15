@@ -5,11 +5,9 @@ import axios from '../../axios';
 const addFollowerStart = () => {
     return { type: actionTypes.ADD_FOLLOWER_START }
 };
-
 const addFollowerSuccess = (response) => {
     return { type: actionTypes.ADD_FOLLOWER_SUCCESS }
 };
-
 const addFollowerFail = (error) => {
     return {
         type: actionTypes.ADD_FOLLOWER_FAIL,
@@ -40,23 +38,19 @@ export const addFollowerInit = (userID, token) => {
 const getMyFollowersStart = () => {
     return { type: actionTypes.GET_MY_FOLLOWERS_START }
 };
-
 const getMyFollowersSuccess = (myFollowers) => {
     const myFollowersData = myFollowers.data.data
-
     return {
         type: actionTypes.GET_MY_FOLLOWERS_SUCCESS,
         myFollowersData
     };
 };
-
 const getMyFollowersFail = (error) => {
     return {
         type: actionTypes.GET_MY_FOLLOWERS_FAIL,
         error
     };
 };
-
 export const getMyFollowersInit = (token) => {
     return dispatch => {
         dispatch(getMyFollowersStart())
@@ -70,11 +64,9 @@ export const getMyFollowersInit = (token) => {
 };
 
 
-
 const getWhoIFollowStart = () => {
     return { type: actionTypes.GET_WHO_I_FOLLOW_START }
 };
-
 const getWhoIFollowSuccess = (following) => {
     const WhoIFollow = following.data.data
 
@@ -83,14 +75,12 @@ const getWhoIFollowSuccess = (following) => {
         WhoIFollow
     }
 };
-
 const getWhoIFollowFail = (error) => {
     return {
         type: actionTypes.GET_WHO_I_FOLLOW_FAIL,
         error
     }
 };
-
 export const getWhoIFollowInit = (token) => {
     return dispatch => {
         dispatch(getWhoIFollowStart())

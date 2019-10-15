@@ -34,21 +34,18 @@ export const getAllPostsInit = (token) => {
 const getMyPostsStart = () => {
     return { type: actionTypes.GET_MY_POSTS_START }
 };
-
 const getMyPostsSuccess = (myPosts) => {
     return {
         type: actionTypes.GET_MY_POSTS_SUCCESS,
         myPosts
     };
 };
-
 const getMyPostsFail = (error) => {
     return {
         type: actionTypes.GET_MY_POSTS_FAIL,
         error
     };
 };
-
 export const getMyPostsInit = (token) => {
     return dispatch => {
         dispatch(getMyPostsStart())
@@ -65,11 +62,9 @@ export const getMyPostsInit = (token) => {
 const deletePostStart = () => {
     return { type: actionTypes.DELETE_POST_START }
 };
-
 const deletePostSuccess = (response) => {
     return { type: actionTypes.DELETE_POST_SUCCESS }
 };
-
 const deletePostFail = (error) => {
     return {
         type: actionTypes.DELETE_POST_FAIL,
